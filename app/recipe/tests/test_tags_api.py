@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from core.models import Tag
+from core.models import Ingredient
 
 from recipe.serializers import TagSerializer
 
@@ -82,6 +83,14 @@ class PrivateTagsApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_ingredients_str(self):
+        """Test the ingredient string representation"""
+        ingredient = Ingredient.objects.create(
+            user=self.user,
+            name='Cucumber'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
 
 
 
